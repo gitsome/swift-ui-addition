@@ -12,11 +12,10 @@ let QUESTION_AMOUNTS = [5, 10, 20]
 
 struct ContentView: View {
     
-    
-    
     @State private var playingGame = false
     @State private var additionNumber = 1
     @State private var numberOfQuestions = 5
+    @State private var showEmitterForNumber: Int? = nil
         
     @State private var showGameView = false
     
@@ -50,7 +49,8 @@ struct ContentView: View {
                                         number: thisNumber,
                                         animalImage: chunkedAnimals[i][j].rawValue,
                                         progress: userProgress.numberProgress[thisNumber - 1],
-                                        isSelected: (additionNumber == thisNumber)
+                                        isSelected: (additionNumber == thisNumber),
+                                        showEmitter: showEmitterForNumber == thisNumber
                                     ) {
                                         additionNumber = thisNumber
                                         self.soundManager.play("\(thisNumber)")
@@ -92,7 +92,11 @@ struct ContentView: View {
             .navigationDestination(for: String.self) { dest in
                 
                 if dest == "GameView" {
-                    GameView(number: additionNumber, numberOfQuestions: numberOfQuestions, userProgress: userProgress)
+                    GameView(number: additionNumber, numberOfQuestions: numberOfQuestions, userProgress: userProgress) {
+                        gameStatus, number, completed in
+                        showEmitterForNumber = number
+                        print(gameStatus, number, completed)
+                    }
                 }
             }
             .padding(.horizontal)

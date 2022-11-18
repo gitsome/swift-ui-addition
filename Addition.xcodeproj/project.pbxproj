@@ -18,6 +18,8 @@
 		E79B19AA28E1433300231BE5 /* UserProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79B19A928E1433300231BE5 /* UserProgress.swift */; };
 		E7CEEE8F2924504C002744A3 /* AnimalGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CEEE8E2924504C002744A3 /* AnimalGroup.swift */; };
 		E7CEEE912926F5AD002744A3 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CEEE902926F5AD002744A3 /* SoundManager.swift */; };
+		E7CEEE9329280A11002744A3 /* EmitterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CEEE9229280A11002744A3 /* EmitterView.swift */; };
+		E7CEEE9529280A6E002744A3 /* ParticleEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CEEE9429280A6E002744A3 /* ParticleEmitter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,8 @@
 		E79B19A928E1433300231BE5 /* UserProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProgress.swift; sourceTree = "<group>"; };
 		E7CEEE8E2924504C002744A3 /* AnimalGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalGroup.swift; sourceTree = "<group>"; };
 		E7CEEE902926F5AD002744A3 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		E7CEEE9229280A11002744A3 /* EmitterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmitterView.swift; sourceTree = "<group>"; };
+		E7CEEE9429280A6E002744A3 /* ParticleEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticleEmitter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +80,8 @@
 				E79B19A928E1433300231BE5 /* UserProgress.swift */,
 				E7CEEE8E2924504C002744A3 /* AnimalGroup.swift */,
 				E7CEEE902926F5AD002744A3 /* SoundManager.swift */,
+				E7CEEE9229280A11002744A3 /* EmitterView.swift */,
+				E7CEEE9429280A6E002744A3 /* ParticleEmitter.swift */,
 			);
 			path = Addition;
 			sourceTree = "<group>";
@@ -159,6 +165,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E79B19A828E0C82F00231BE5 /* AnimalButton.swift in Sources */,
+				E7CEEE9329280A11002744A3 /* EmitterView.swift in Sources */,
 				E78BD10228DD118F0070E4F5 /* ContentView.swift in Sources */,
 				E78BD11028DE64E90070E4F5 /* SwiftExtensions.swift in Sources */,
 				E7CEEE8F2924504C002744A3 /* AnimalGroup.swift in Sources */,
@@ -167,6 +174,7 @@
 				E79B19AA28E1433300231BE5 /* UserProgress.swift in Sources */,
 				E79B19A628E0C72C00231BE5 /* GameView.swift in Sources */,
 				E7CEEE912926F5AD002744A3 /* SoundManager.swift in Sources */,
+				E7CEEE9529280A6E002744A3 /* ParticleEmitter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,6 +14,13 @@ enum CorrectPhrases: String, CaseIterable {
     case wow = "Wow, that's right!"
 }
 
+enum WrongPhrases: String, CaseIterable {
+    case incorrect = "That is incorrect. Try again."
+    case weak = "Weak Sauce! That is wrong."
+    case sorry = "Sorry, try again."
+    case nope = "Nope!"
+}
+
 enum PhraseType: CaseIterable {
     case SimpleAddition
     case Total
@@ -48,10 +55,18 @@ enum FocusField: Hashable {
     case textField
 }
 
+enum GAME_STATUS {
+    case COMPLETE
+    case INCOMPLETE
+}
+
 struct GameView: View {
     
     var number: Int
     var numberOfQuestions: Int
+    var onComplete: (GAME_STATUS, Int, Int) -> Void
+    
+    @Environment(\.dismiss) private var dismiss
     
     @StateObject var soundManager: SoundManager = SoundManager()
     @ObservedObject var userProgress: UserProgress
@@ -63,10 +78,11 @@ struct GameView: View {
     @State private var visualization = "Group of 5"
     @FocusState private var focusedField: FocusField?
     
-    init(number: Int, numberOfQuestions: Int, userProgress: UserProgress) {
+    init(number: Int, numberOfQuestions: Int, userProgress: UserProgress, onComplete: @escaping (GAME_STATUS, Int, Int) -> Void) {
         self.number = number
         self.numberOfQuestions = numberOfQuestions
         self.userProgress = userProgress
+        self.onComplete = onComplete
         
         // QUESTION: Should do this in onAppear?
         _allQuestions = State(initialValue: getRandomQuestions(number: number, numberOfQuestions: numberOfQuestions))
@@ -74,8 +90,14 @@ struct GameView: View {
     
     func nextQuestion() {
         guess = ""
-        currentQuestion = currentQuestion + 1
-        readCurrentQuestion()
+        
+        if currentQuestion == numberOfQuestions - 1 {
+            onComplete(GAME_STATUS.COMPLETE, number, numberOfQuestions)
+            dismiss()
+        } else {
+            currentQuestion = currentQuestion + 1
+            readCurrentQuestion()
+        }
     }
     
     func getAdditionPhraseForQuestion(_ question: AdditionQuestion) -> String {
@@ -112,12 +134,13 @@ struct GameView: View {
             let correctStatement = CorrectPhrases.allCases.randomElement()!.rawValue
             self.soundManager.play("\(question.result)."){
                 self.soundManager.play(correctStatement){
-                    print("about to do next question")
                     nextQuestion()
                 }
             }
         } else {
-            self.soundManager.play("That is wrong. Try again!")
+            let wrongStatement = WrongPhrases.allCases.randomElement()!.rawValue
+            self.soundManager.play(wrongStatement)
+            guess = ""
         }
         focusedField = .textField
     }
@@ -133,7 +156,7 @@ struct GameView: View {
                 
                 VStack {
                     Group {
-                        ProgressView("\(self.currentQuestion + 1) of \(self.numberOfQuestions)", value: Float(currentQuestion), total: Float(self.numberOfQuestions))
+                        ProgressView("\(self.currentQuestion + 1) of \(self.numberOfQuestions)", value: Float(currentQuestion + 1), total: Float(self.numberOfQuestions))
                     }
                     .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
                     
@@ -198,6 +221,6 @@ struct GameView: View {
 
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
-        GameView(number:0, numberOfQuestions: 2, userProgress: UserProgress())
+        GameView(number:0, numberOfQuestions: 2, userProgress: UserProgress()) { gameStatus, number, completed in }
     }
 }

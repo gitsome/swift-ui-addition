@@ -13,6 +13,7 @@ struct AnimalButton: View {
     var animalImage: String
     var progress: Int
     var isSelected: Bool
+    var showEmitter: Bool
     var onSelected: () -> Void
         
     var body: some View {
@@ -48,11 +49,16 @@ struct AnimalButton: View {
                 onSelected()
             }
         }
+        .overlay() {
+            if showEmitter {
+                EmitterView(colors: [UIColor.blue])
+            }
+        }.zIndex(1)
     }
 }
 
 struct AnimalButton_Previews: PreviewProvider {
     static var previews: some View {
-        AnimalButton(number: 1, animalImage: ANIMALS.cow.rawValue, progress: 25, isSelected: false) {}
+        AnimalButton(number: 1, animalImage: ANIMALS.cow.rawValue, progress: 25, isSelected: false, showEmitter: false) {}
     }
 }
