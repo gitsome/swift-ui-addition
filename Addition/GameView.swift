@@ -12,10 +12,12 @@ enum CorrectPhrases: String, CaseIterable {
     case awesome = "Awesome Sauce!"
     case right = "That's right!"
     case excellent = "Excellent work!"
-    case wow = "Wow, that's right!"
+    case sweet = "Sweet, that's right!"
     case booyah = "Boo ya"
     case success = "Success!"
     case rock = "You rock!"
+    case sick = "Sick bird!"
+    case rad = "That's Radical bro!"
 }
 
 enum WrongPhrases: String, CaseIterable {
