@@ -8,17 +8,21 @@
 import SwiftUI
 
 enum CorrectPhrases: String, CaseIterable {
-    case correct = "That is correct. Nice job!"
-    case awesome = "Awesome Sauce! That's right!"
+    case correct = "That's correct. Nice job!"
+    case awesome = "Awesome Sauce!"
+    case right = "That's right!"
     case excellent = "Excellent work!"
     case wow = "Wow, that's right!"
+    case booyah = "Boo ya"
+    case success = "Success!"
+    case rock = "You rock!"
 }
 
 enum WrongPhrases: String, CaseIterable {
     case incorrect = "That is incorrect. Try again."
-    case weak = "Weak Sauce! That is wrong."
+    case weak = "Weak Sauce! Try again."
     case sorry = "Sorry, try again."
-    case nope = "Nope!"
+    case whoops = "Whoops. Wrong."
 }
 
 enum PhraseType: CaseIterable {
@@ -75,8 +79,12 @@ struct GameView: View {
     @State private var numberCorrect = 0
     @State private var allQuestions: [AdditionQuestion] = []
     @State private var guess = ""
-    @State private var visualization = "Group of 5"
+    
+    @State private var isSubmitting = false
+    
+    
     @FocusState private var focusedField: FocusField?
+    
     
     init(number: Int, numberOfQuestions: Int, userProgress: UserProgress, onComplete: @escaping (GAME_STATUS, Int, Int) -> Void) {
         self.number = number
@@ -90,6 +98,7 @@ struct GameView: View {
     
     func nextQuestion() {
         guess = ""
+        isSubmitting = false
         
         if currentQuestion == numberOfQuestions - 1 {
             onComplete(GAME_STATUS.COMPLETE, number, numberOfQuestions)
@@ -131,6 +140,8 @@ struct GameView: View {
      
     func checkAnswer() {
 
+        isSubmitting = true
+        
         let question = allQuestions[currentQuestion]
         if Int(guess) == question.result {
             let correctStatement = CorrectPhrases.allCases.randomElement()!.rawValue
@@ -143,6 +154,7 @@ struct GameView: View {
             let wrongStatement = WrongPhrases.allCases.randomElement()!.rawValue
             self.soundManager.play(wrongStatement)
             guess = ""
+            isSubmitting = false
         }
         focusedField = .textField
     }
@@ -207,6 +219,7 @@ struct GameView: View {
                             .frame(maxWidth: .infinity)
                     }
                     .buttonStyle(.borderedProminent)
+                    .disabled(isSubmitting)
                 }
                 .padding(EdgeInsets(top: 0, leading: 10, bottom: 5, trailing: 10))
                 

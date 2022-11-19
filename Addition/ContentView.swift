@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-let QUESTION_AMOUNTS = [2, 5, 10, 15]
+let QUESTION_AMOUNTS = [5, 10, 15]
 
-let MAX_ADDITION_QUESTIONS: Int = 2
+let MAX_ADDITION_QUESTIONS: Int = 50
 
 struct ContentView: View {
     
