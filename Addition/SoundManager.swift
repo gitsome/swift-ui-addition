@@ -12,6 +12,7 @@ class SoundManager: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
     internal var errorDescription: String? = nil
     
     private let synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
+    private var avPlayer: AVAudioPlayer = AVAudioPlayer()
     private var utteranceMap: [AVSpeechUtterance: ()->Void] = [:]
     
     @Published var isSpeaking: Bool = false
@@ -22,7 +23,7 @@ class SoundManager: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
         self.synthesizer.delegate = self
     }
 
-    internal func play(_ text: String, _ callback: (() -> Void)? = nil) {
+    func play(_ text: String, _ callback: (() -> Void)? = nil) {
 
         let utterance = AVSpeechUtterance(string: text)
         
@@ -31,6 +32,28 @@ class SoundManager: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
         
         if let unwrappedCallback = callback {
             utteranceMap[utterance] = unwrappedCallback
+        }
+    }
+    
+    func playEffect(_ filename: String, _ ext: String) {
+        
+        print("starting")
+        
+        // Load a sound file URL
+        guard let soundFileURL = Bundle.main.url(forResource: filename, withExtension: ext) else {
+            return
+        }
+        
+        print(soundFileURL)
+        
+        do {
+            // Play a sound
+            self.avPlayer = try AVAudioPlayer(contentsOf: soundFileURL)
+            self.avPlayer.prepareToPlay()
+            self.avPlayer.play()
+        }
+        catch {
+            print("Unexpected error: \(error).")
         }
     }
     

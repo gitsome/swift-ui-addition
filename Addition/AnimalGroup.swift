@@ -15,7 +15,7 @@ struct AnimalGroup: View {
     var animalImage: String
     
     var body: some View {
-
+        
         let totalRows = 5
         let totalColumns = Int(ceil(Float(total) / Float(totalRows)))
         
@@ -34,14 +34,17 @@ struct AnimalGroup: View {
                                         .resizable()
                                         .scaledToFit()
                                         .frame(width: ANIMAL_IMAGE_SIZE, height: ANIMAL_IMAGE_SIZE)
+                                        .transition(.scale)
                                 } else {
                                     Text(" ")
                                         .frame(width: ANIMAL_IMAGE_SIZE, height: ANIMAL_IMAGE_SIZE)
+                                        .transition(.scale)
                                 }
                             }
                         }
                     }
                 }
+                .animation(.spring(), value: totalColumns)
                 
             } else {
                 Text("0")

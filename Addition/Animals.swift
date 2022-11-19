@@ -9,13 +9,13 @@ import Foundation
 
 
 enum ANIMALS: String, CaseIterable {
-    case owl = "owl"
+    case owel = "owel"
     case cow = "cow"
     case pig = "pig"
     case frog = "frog"
     case giraffe = "giraffe"
     case snake = "snake"
-    case sloth = "sloth"
+    case slawth = "slawth"
     case crocodile = "crocodile"
     case rhino = "rhino"
     case monkey = "monkey"

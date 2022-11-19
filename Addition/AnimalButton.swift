@@ -7,6 +7,19 @@
 
 import SwiftUI
 
+func getColorForThreshold (_ threshold: Int) -> Color {
+    
+    let percentProgress = Float(threshold) / Float(MAX_ADDITION_QUESTIONS)
+    
+    if percentProgress < 0.01 {
+        return Color(UIColor.systemGray6)
+    } else if percentProgress < 1.0 {
+        return Color.blue.opacity(Double(percentProgress) * 0.85 + 0.15)
+    } else {
+        return Color.gray
+    }
+}
+
 struct AnimalButton: View {
  
     var number: Int
@@ -24,10 +37,10 @@ struct AnimalButton: View {
                 .fill(isSelected ? Color(red: 0.3, green: 0.3, blue: 0.3): Color(red: 0.3, green: 0.3, blue: 0.3).opacity(0))
                 .scaleEffect(isSelected ? 1 : 0)
                 .frame(maxWidth: 35)
-                .offset(CGSize(width: 0, height: -20))
+                .offset(CGSize(width: 0, height: -19))
                 .animation(.interpolatingSpring(stiffness: 100, damping: 10), value: isSelected)
                 
-            Gauge(value: Float(progress) / 100.0, in: 0...100) {
+            Gauge(value: Float(progress), in: 0...Float(MAX_ADDITION_QUESTIONS)) {
                 Image(animalImage)
                     .resizable()
                     .scaledToFit()
@@ -43,7 +56,7 @@ struct AnimalButton: View {
                     .animation(.interpolatingSpring(stiffness: 100, damping: 10), value: isSelected)
             }
             .gaugeStyle(.accessoryCircular)
-            .tint(Color(UIColor.systemGray6))
+            .tint(getColorForThreshold(progress))
             .padding(EdgeInsets(top: 0, leading: 12, bottom: 38, trailing: 12))
             .onTapGesture {
                 onSelected()
@@ -51,9 +64,10 @@ struct AnimalButton: View {
         }
         .overlay() {
             if showEmitter {
-                EmitterView(colors: [UIColor.blue])
+                EmitterView(colors: [UIColor.systemOrange, UIColor.systemPink, UIColor.systemRed, UIColor.systemPurple, UIColor.systemGreen])
+                    .offset(y: -20)
             }
-        }.zIndex(1)
+        }.zIndex(100)
     }
 }
 

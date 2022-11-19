@@ -20,6 +20,11 @@
 		E7CEEE912926F5AD002744A3 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CEEE902926F5AD002744A3 /* SoundManager.swift */; };
 		E7CEEE9329280A11002744A3 /* EmitterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CEEE9229280A11002744A3 /* EmitterView.swift */; };
 		E7CEEE9529280A6E002744A3 /* ParticleEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CEEE9429280A6E002744A3 /* ParticleEmitter.swift */; };
+		E7CEEE9729282C3F002744A3 /* coins.wav in Resources */ = {isa = PBXBuildFile; fileRef = E7CEEE9629282C3F002744A3 /* coins.wav */; };
+		E7CEEE9929285519002744A3 /* correct.wav in Resources */ = {isa = PBXBuildFile; fileRef = E7CEEE9829285519002744A3 /* correct.wav */; };
+		E7CEEE9B292855B9002744A3 /* collection.wav in Resources */ = {isa = PBXBuildFile; fileRef = E7CEEE9A292855B9002744A3 /* collection.wav */; };
+		E7CEEE9D2928A603002744A3 /* celebrate.wav in Resources */ = {isa = PBXBuildFile; fileRef = E7CEEE9C2928A603002744A3 /* celebrate.wav */; };
+		E7CEEE9F2928A7F0002744A3 /* CelebrationParticles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CEEE9E2928A7F0002744A3 /* CelebrationParticles.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +42,11 @@
 		E7CEEE902926F5AD002744A3 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		E7CEEE9229280A11002744A3 /* EmitterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmitterView.swift; sourceTree = "<group>"; };
 		E7CEEE9429280A6E002744A3 /* ParticleEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticleEmitter.swift; sourceTree = "<group>"; };
+		E7CEEE9629282C3F002744A3 /* coins.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = coins.wav; sourceTree = "<group>"; };
+		E7CEEE9829285519002744A3 /* correct.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = correct.wav; sourceTree = "<group>"; };
+		E7CEEE9A292855B9002744A3 /* collection.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = collection.wav; sourceTree = "<group>"; };
+		E7CEEE9C2928A603002744A3 /* celebrate.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = celebrate.wav; sourceTree = "<group>"; };
+		E7CEEE9E2928A7F0002744A3 /* CelebrationParticles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelebrationParticles.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +63,10 @@
 		E78BD0F328DD118F0070E4F5 = {
 			isa = PBXGroup;
 			children = (
+				E7CEEE9629282C3F002744A3 /* coins.wav */,
+				E7CEEE9A292855B9002744A3 /* collection.wav */,
+				E7CEEE9C2928A603002744A3 /* celebrate.wav */,
+				E7CEEE9829285519002744A3 /* correct.wav */,
 				E78BD0FE28DD118F0070E4F5 /* Addition */,
 				E78BD0FD28DD118F0070E4F5 /* Products */,
 			);
@@ -82,6 +96,7 @@
 				E7CEEE902926F5AD002744A3 /* SoundManager.swift */,
 				E7CEEE9229280A11002744A3 /* EmitterView.swift */,
 				E7CEEE9429280A6E002744A3 /* ParticleEmitter.swift */,
+				E7CEEE9E2928A7F0002744A3 /* CelebrationParticles.swift */,
 			);
 			path = Addition;
 			sourceTree = "<group>";
@@ -152,7 +167,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7CEEE9B292855B9002744A3 /* collection.wav in Resources */,
+				E7CEEE9729282C3F002744A3 /* coins.wav in Resources */,
+				E7CEEE9929285519002744A3 /* correct.wav in Resources */,
 				E78BD10728DD11910070E4F5 /* Preview Assets.xcassets in Resources */,
+				E7CEEE9D2928A603002744A3 /* celebrate.wav in Resources */,
 				E78BD10428DD11910070E4F5 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -172,6 +191,7 @@
 				E78BD10E28DE61A10070E4F5 /* Animals.swift in Sources */,
 				E78BD10028DD118F0070E4F5 /* AdditionApp.swift in Sources */,
 				E79B19AA28E1433300231BE5 /* UserProgress.swift in Sources */,
+				E7CEEE9F2928A7F0002744A3 /* CelebrationParticles.swift in Sources */,
 				E79B19A628E0C72C00231BE5 /* GameView.swift in Sources */,
 				E7CEEE912926F5AD002744A3 /* SoundManager.swift in Sources */,
 				E7CEEE9529280A6E002744A3 /* ParticleEmitter.swift in Sources */,

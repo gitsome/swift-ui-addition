@@ -103,7 +103,9 @@ struct GameView: View {
     func getAdditionPhraseForQuestion(_ question: AdditionQuestion) -> String {
         
         let phraseType = PhraseType.allCases.randomElement()!
-                
+        let addendIsPlural = question.addend != 1
+        let numberIsPlural = question.number != 1
+        
         switch phraseType {
         case .SimpleAddition:
             return "What is \(question.number) plus \(question.addend)?"
@@ -112,13 +114,13 @@ struct GameView: View {
         case .Sum:
             return "What is the sum of \(question.number) and \(question.addend)?"
         case .Combine:
-            return "How many \(question.units)s if you combine \(question.number) and \(question.addend) \(question.units)s?"
+            return "How many \(question.units)s if you combine \(question.number) and \(question.addend) \(question.units)\(addendIsPlural ? "s" : "")?"
         case .MoreThan:
             return "What is \(question.addend) more than \(question.number)?"
         case .HowManyUnits:
-            return "If you started with \(question.number) \(question.units)s and added \(question.addend) more, how many would you have?"
+            return "If you started with \(question.number) \(question.units)\(numberIsPlural ? "s" : "") and added \(question.addend) more, how many would you have?"
         case .WhatDoYouGetUnits:
-            return "What do you get when you add \(question.number) \(question.units)s and \(question.addend) \(question.units)s together?"
+            return "What do you get when you add \(question.number) \(question.units)\(numberIsPlural ? "s" : "") and \(question.addend) \(question.units)\(addendIsPlural ? "s" : "") together?"
         }
     }
     

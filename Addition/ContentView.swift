@@ -7,20 +7,35 @@
 
 import SwiftUI
 
-let QUESTION_AMOUNTS = [5, 10, 20]
+let QUESTION_AMOUNTS = [2, 5, 10, 15]
 
+let MAX_ADDITION_QUESTIONS: Int = 2
 
 struct ContentView: View {
     
     @State private var playingGame = false
     @State private var additionNumber = 1
-    @State private var numberOfQuestions = 5
+    @State private var numberOfQuestions = QUESTION_AMOUNTS[0]
     @State private var showEmitterForNumber: Int? = nil
+    @State private var showCompletionForNumber: Int? = nil
         
     @State private var showGameView = false
     
     @StateObject private var userProgress = UserProgress()
     @StateObject var soundManager: SoundManager = SoundManager()
+    
+    func playCompletionCelebration(_ number: Int) {
+        showCompletionForNumber = number
+        soundManager.playEffect("celebrate", "wav")
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.soundManager.play("Way to go! You completed number \(number)")
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            showCompletionForNumber = nil
+        }
+    }
     
     var body: some View {
         
@@ -94,13 +109,42 @@ struct ContentView: View {
                 if dest == "GameView" {
                     GameView(number: additionNumber, numberOfQuestions: numberOfQuestions, userProgress: userProgress) {
                         gameStatus, number, completed in
-                        showEmitterForNumber = number
-                        print(gameStatus, number, completed)
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                            
+                            showEmitterForNumber = number
+                                                        
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                
+                                showEmitterForNumber = nil
+                                
+                                let wasNotComplete = userProgress.numberProgress[number - 1] < MAX_ADDITION_QUESTIONS
+                                let isCompleteNow = userProgress.numberProgress[number - 1] + completed >= MAX_ADDITION_QUESTIONS
+                                let wasJustCompleted = wasNotComplete && isCompleteNow
+                                
+                                withAnimation() {
+                                    userProgress.numberProgress[number - 1] = userProgress.numberProgress[number - 1] + completed
+                                    
+                                    if wasJustCompleted {
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
+                                            playCompletionCelebration(number)
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            soundManager.playEffect("collection", "wav")
+                        }
                     }
                 }
             }
             .padding(.horizontal)
             .navigationTitle("Addition")
+        }
+        .overlay(alignment: .top) {
+            if showCompletionForNumber != nil {
+                CelebrationEmitterView(colors: [UIColor.systemOrange, UIColor.systemPink, UIColor.systemRed, UIColor.systemPurple, UIColor.systemGreen])
+            }
         }
     }
 }
