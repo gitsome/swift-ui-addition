@@ -61,6 +61,7 @@ enum FocusField: Hashable {
     case textField
 }
 
+// TODO: Enum and case Names Standardization
 enum GAME_STATUS {
     case COMPLETE
     case INCOMPLETE

@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// SharedConstants perhaps?
 func getColorForThreshold (_ threshold: Int) -> Color {
     
     let percentProgress = Float(threshold) / Float(MAX_ADDITION_QUESTIONS)
@@ -22,11 +23,13 @@ func getColorForThreshold (_ threshold: Int) -> Color {
 
 struct AnimalButton: View {
  
+    // I'm not sure on the intent with all of these variables but I do question if some should be @State variables simply because if they are to change than the view would never update. Although maybe the variables values are dependent to another view further up the view tree closer to the root view....
+    
     var number: Int
     var animalImage: String
-    var progress: Int
-    var isSelected: Bool
-    var showEmitter: Bool
+    var progress: Int           // @State?
+    var isSelected: Bool        // @State?
+    var showEmitter: Bool       // @State?
     var onSelected: () -> Void
         
     var body: some View {
