@@ -36,6 +36,7 @@ struct AnimalGroup: View {
                                         .frame(width: ANIMAL_IMAGE_SIZE, height: ANIMAL_IMAGE_SIZE)
                                         .transition(.scale)
                                 } else {
+                                    // This could be replaced with an EmptyView enstead of a Text View...
                                     Text(" ")
                                         .frame(width: ANIMAL_IMAGE_SIZE, height: ANIMAL_IMAGE_SIZE)
                                         .transition(.scale)
